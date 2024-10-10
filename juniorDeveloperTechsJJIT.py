@@ -1,10 +1,15 @@
 # juniorDeveloperTechsJJIT.py - takes the junior job offers count for the following technologies: AI, Python, Ruby, Java, JS, PHP and DevOps and makes a bar chart from them
 
 # Step1: Return the proper value of the offers for each technology - print the text of that
+# Step2: Save the result in a dictionary, with a format: {Technology: number of jobs}
 
-import requests, bs4
+import requests, bs4, re
 
 addresses = []
+
+techAndNumRegex = re.compile(r'^(\w+\W?\w+)  - (\d{1,3})? offers$')
+
+techDict = {}
 
 # Python
 addressPy = 'https://justjoin.it/all-locations/python/experience-level_junior'
@@ -55,4 +60,11 @@ for address in addresses:
 
 
     # '[12:]' trims the 'Job offers: ' with trimming the first 12 characters
-    print(textNumOfJuniorJobs[12:])
+    techTextAndNum = textNumOfJuniorJobs[12:]
+    print(techTextAndNum)
+
+    mo = techAndNumRegex.search(techTextAndNum)
+
+    techDict.setdefault(mo.group(1), mo.group(2))
+
+print(techDict)
