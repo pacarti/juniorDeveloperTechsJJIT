@@ -15,8 +15,12 @@ The chart(and printout) is sorted regarding the offers count - largest to smalle
 </ul>
 <h2>How to use:</h2>
 <code>./juniorDevJJIT</code><br><br>
-The script requires the <b>matplotlib</b> module. Installation:<br>
-<code>python -m pip install -U matplotlib</code><br><br>
+The script requires the <b>requests</b>, <b>beautiful soup 4</b> and <b>matplotlib</b> modules. Installation:<br>
+<code>python -m pip install -U requests</code><br>
+<code>python -m pip install -U beautifulsoup4</code><br>
+<code>python -m pip install -U matplotlib</code>
+  
+  <br><br>
 Remember that when you run it for the first time, you have to give execution permission to the script:<br>
 <code>chmod +x juniorDevJJIT</code>
 <br><br>
