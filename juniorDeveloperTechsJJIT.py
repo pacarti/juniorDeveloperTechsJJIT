@@ -1,9 +1,7 @@
 # juniorDeveloperTechsJJIT.py - takes the junior job offers count for the following technologies: AI, Python, Ruby, Java, JS, PHP and DevOps and makes a bar chart from them
 
-# Step1: Return the proper value of the offers for each technology - print the text of that
-# Step2: Save the result in a dictionary, with a format: {Technology: number of jobs}
-
 import requests, bs4, re
+import matplotlib.pyplot as plt
 
 addresses = []
 
@@ -39,7 +37,6 @@ addresses.append(addressTesting)
 addressTesting = 'https://justjoin.it/all-locations/mobile/experience-level_junior'
 addresses.append(addressTesting)
 
-print("Job offers count:")
 
 for address in addresses:
     try:
@@ -61,10 +58,25 @@ for address in addresses:
 
     # '[12:]' trims the 'Job offers: ' with trimming the first 12 characters
     techTextAndNum = textNumOfJuniorJobs[12:]
-    print(techTextAndNum)
 
     mo = techAndNumRegex.search(techTextAndNum)
 
-    techDict.setdefault(mo.group(1), mo.group(2))
+    techDict.setdefault(mo.group(1), int(mo.group(2)))
 
-print(techDict)
+
+print("Job offers count:")
+
+for k, v in techDict.items():
+    print(k + ':  ' + str(v))
+
+plt.bar(range(len(techDict)), list(techDict.values()), width = 0.7, color = [(0.16, 0.52, 0.8), 'orange', 'purple', (0.8, 0.67, 0), 'red', 'gray', 'cyan', (0.306, 0.561, 0.016), '#2fff00'])
+
+plt.xticks(range(len(techDict)), list(techDict.keys()))
+
+plt.title('justjoin.it - offers for Junior Developer')
+
+plt.xlabel('Technology')
+
+plt.ylabel('Offers count')
+
+plt.show()
